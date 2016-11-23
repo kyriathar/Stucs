@@ -14,18 +14,18 @@ int main(){
   srand((unsigned int) seconds);
 
   Stucs s(5, 10, 5);
-  s.insert(1, "Tharrouniatis", "Kyriakos", 10, 46, "Kapodistrian",
+  s.insert(1, "Tharrouniatis", "Kyriakos", 10, 52, "Kapodistrian",
 	   15342 );
 
   s.insert(2, "Gianoukakis", "Thanos", 5.0, 5, "Kapodistrian",
 	   15342 );
 
-  s.insert(3, "Gianakopoulos", "Panagiwtis", 7.5, 46, "Kapodistrian",
+  s.insert(3, "Gianakopoulos", "Panagiwtis", 2.5, 52, "Kapodistrian",
 	   15342 );
 
   s.insert(4, "Euaggeliou", "Dimitris", 8.9, 7, "Kapodistrian",
 	   15342 );
 
-  s.average(15342);
+  s.find(3);
   return 0;
 }

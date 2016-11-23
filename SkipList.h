@@ -48,11 +48,9 @@ class SkipIterator{
  public:
   SkipIterator(SkipList& s, int studida);
   SkipIterator(SkipList& s);
-  bool isValid();
   bool hasNext(int studidb);
   bool hasNext();
-  SkipNode* current();
-  SkipNode* next();
+  StudentEntry* next();
 };
 
 #endif

@@ -174,33 +174,26 @@ void SkipList :: print(){
 
 SkipIterator* SkipList ::iterator(int studida){
   SkipIterator *it = new SkipIterator(*this, studida);
-  if(it->isValid())
-    return it;
-  else
-    return NULL;
+  return it;
 }
 
 SkipIterator* SkipList :: iterator(){
   SkipIterator *it = new SkipIterator(*this);
-  if(it->isValid())
-    return it;
-  else
-    return NULL;
+  return it;
 }
 
 SkipIterator :: SkipIterator(SkipList& s, int studida){
-  skipNode = s.searchSkipNode(studida);
+  skipNode = new SkipNode;
+  skipNode->studentEntry = NULL;
+  skipNode->forward = new SkipNode*[1];
+  skipNode->forward[0] = s.searchSkipNode(studida);
 }
 
 SkipIterator :: SkipIterator(SkipList& s){
-  skipNode = s.getFirst();
-}
-
-bool SkipIterator :: isValid(){
-  if(skipNode != NULL)
-    return true;
-  else
-    return false;
+  skipNode = new SkipNode;
+  skipNode->studentEntry = NULL;
+  skipNode->forward = new SkipNode*[1];
+  skipNode->forward[0] = s.getFirst();
 }
 
 bool SkipIterator :: hasNext(int studidb){
@@ -217,11 +210,7 @@ bool SkipIterator :: hasNext(){
     return false;
 }
 
-SkipNode* SkipIterator :: current(){
-  return skipNode;
-}
-
-SkipNode* SkipIterator :: next(){
+StudentEntry* SkipIterator :: next(){
   skipNode = skipNode->forward[0];
-  return skipNode;
+  return skipNode->studentEntry;
 }

@@ -19,7 +19,7 @@ class Stucs{
   void query(int studid);
   void modify(int studid, float gpa, int numcourses);
   void del(int studid);
-  double raverage(int studida, int studidb);
+  void raverage(int studida, int studidb);
   void average(int postcode);
   void taverage(int k, int postcode);
   void bottom(int k);

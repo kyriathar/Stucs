@@ -55,25 +55,24 @@ void Stucs :: del(int studid){
     cout << "delete :: No Student found !" << endl;
 }
 
-double Stucs :: raverage(int studida, int studidb){
+void Stucs :: raverage(int studida, int studidb){
   double gpaAverage = 0;
+  StudentEntry *studentEntry;
   if(skipList->search(studida) == NULL || skipList->search(studidb) == NULL){
     cout << "raverage :: studidx doesn't exist" << endl;
     gpaAverage = -1;
   }else{
     int i = 0;
     SkipIterator *it = skipList->iterator(studida);
-    if(it != NULL){
-      gpaAverage += it->current()->studentEntry->getGpa();
+    while(it->hasNext(studidb)){
+      studentEntry = it->next();
+      gpaAverage += studentEntry->getGpa();
       i++;
-      while(it->hasNext(studidb)){
-	gpaAverage += it->next()->studentEntry->getGpa();
-	i++;
-      }
-      gpaAverage = gpaAverage/(double)i;
     }
+    gpaAverage = gpaAverage/(double)i;
   }
-  return gpaAverage;
+  cout << "raverage : " << endl;
+  cout << "gpaAverage = " << gpaAverage << endl;
 }
 
 void Stucs :: average(int postcode){
@@ -112,16 +111,14 @@ void Stucs :: taverage(int k, int postcode){
 
 void Stucs :: bottom(int k){
   DoubleLinkedList l;
+  StudentEntry *studentEntry;
   SkipIterator *it = skipList->iterator();
-  if(it != NULL){
-    l.add(it->current()->studentEntry);
-    while(it->hasNext()){
-      it->next();
-      l.add(it->current()->studentEntry);
-    }
-    l.bubbleSort();
-    l.printReverse(k);
+  while(it->hasNext()){
+    studentEntry = it->next();
+    l.add(studentEntry);
   }
+  l.bubbleSort();
+  l.printReverse(k);
 }
 
 void Stucs :: coursesToTake(int postcode, string deprt){
@@ -149,26 +146,19 @@ void Stucs :: find(float thresholdGpa){
   string firstname;
   string lastname;
   float gpa;
+  StudentEntry *studentEntry;
   SkipIterator *it = skipList->iterator();
   cout << "find :" << endl;
   cout << "they owe MAXNUM of courses : " << endl;
   cout << "and have gpa more than " << thresholdGpa << " : "  << endl;
   cout << "firstname\t" << "lastname\t" << "gpa" << endl;
-  if(it != NULL){
-    if(it->current()->studentEntry->getNumofcourses() == MAX_NUMOFCOURSES && it->current()->studentEntry->getGpa() >= thresholdGpa){
-      firstname = it->current()->studentEntry->getFirstname();
-      lastname = it->current()->studentEntry->getLastname();
-      gpa = it->current()->studentEntry->getGpa();
+  while(it->hasNext()){
+    studentEntry = it->next();
+    if(studentEntry->getNumofcourses() == MAX_NUMOFCOURSES && studentEntry->getGpa() >= thresholdGpa){
+      firstname = studentEntry->getFirstname();
+      lastname = studentEntry->getLastname();
+      gpa = studentEntry->getGpa();
       cout << firstname << "\t"<< lastname << "\t" << gpa << endl;
-    }
-    while(it->hasNext()){
-      it->next();
-      if(it->current()->studentEntry->getNumofcourses() == MAX_NUMOFCOURSES && it->current()->studentEntry->getGpa() >= thresholdGpa){
-	firstname = it->current()->studentEntry->getFirstname();
-	lastname =  it->current()->studentEntry->getLastname();
-	gpa = it->current()->studentEntry->getGpa();
-	cout << firstname << "\t"<< lastname << "\t" << gpa << endl;
-      }
     }
   }
 }
