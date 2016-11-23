@@ -2,7 +2,6 @@
 #define SKIPLIST_H
 
 #include "StudentEntry.h"
-#include "Iterator.h"
 
 typedef struct SkipNode SkipNode;
 

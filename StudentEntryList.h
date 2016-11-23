@@ -35,10 +35,8 @@ class StuIterator{
 
  public:
   StuIterator(StudentEntryList& studentEntryList);
-  bool isValid();
   bool hasNext();
-  StudentEntryNode* current();
-  StudentEntryNode* next();  
+  StudentEntry* next();  
 };
 
 #endif

@@ -21,11 +21,11 @@ int main(){
 	   15342 );
 
   s.insert(3, "Gianakopoulos", "Panagiwtis", 7.5, 46, "Kapodistrian",
-	   15777 );
+	   15342 );
 
   s.insert(4, "Euaggeliou", "Dimitris", 8.9, 7, "Kapodistrian",
-	   15347 );
-  
-  s.percentile(15342);
+	   15342 );
+
+  s.average(15342);
   return 0;
 }

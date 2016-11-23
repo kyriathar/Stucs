@@ -80,45 +80,34 @@ void Stucs :: average(int postcode){
   string firstname;
   string lastname;
   float gpa;
+  StudentEntry *studentEntry;
   StuIterator *it = hashTable->getIter(postcode);
   cout << "average :" << endl;
   cout << "postcode : " << postcode <<endl;
   cout << "firstname\t" << "lastname\t" << "gpa" << endl;
-  if(it != NULL){
-    if(it->current()->studentEntry->getPostCode() == postcode){
-      firstname = it->current()->studentEntry->getFirstname();
-      lastname = it->current()->studentEntry->getLastname();
-      gpa = it->current()->studentEntry->getGpa();
+  while(it->hasNext()){
+    studentEntry = it->next();
+    if(studentEntry->getPostCode() == postcode){
+      firstname = studentEntry->getFirstname();
+      lastname =  studentEntry->getLastname();
+      gpa = studentEntry->getGpa();
       cout << firstname << "\t"<< lastname << "\t" << gpa << endl;
-    }
-    while(it->hasNext()){
-      it->next();
-      if(it->current()->studentEntry->getPostCode() == postcode){
-	firstname = it->current()->studentEntry->getFirstname();
-	lastname =  it->current()->studentEntry->getLastname();
-	gpa = it->current()->studentEntry->getGpa();
-	cout << firstname << "\t"<< lastname << "\t" << gpa << endl;
-      }
     }
   }
 }
 
 void Stucs :: taverage(int k, int postcode){
+  StudentEntry *studentEntry;
   StuIterator *it = hashTable->getIter(postcode);
   DoubleLinkedList l;
-  if(it != NULL){
-    if(it->current()->studentEntry->getPostCode() == postcode){
-      l.add(it->current()->studentEntry);
-    }
-    while(it->hasNext()){
-      it->next();
-      if(it->current()->studentEntry->getPostCode() == postcode){
-	l.add(it->current()->studentEntry);
+  while(it->hasNext()){
+      studentEntry = it->next();
+      if(studentEntry->getPostCode() == postcode){
+	l.add(studentEntry);
       }
     }
     l.bubbleSort();
     l.print(k);
-  }
 }
 
 void Stucs :: bottom(int k){
@@ -139,26 +128,19 @@ void Stucs :: coursesToTake(int postcode, string deprt){
   string firstname;
   string lastname;
   int numofcourses;
+  StudentEntry *studentEntry;
   StuIterator *it = hashTable->getIter(postcode);
   cout << "coursesToTake :" << endl;
   cout << "postcode : " << postcode << endl;
   cout << "deprt : " << deprt << endl;
   cout << "firstname\t" << "lastname\t" << "numofcourses" << endl;
-  if(it != NULL){
-    if(it->current()->studentEntry->getPostCode() == postcode && it->current()->studentEntry->getDeprt() == deprt){
-      firstname = it->current()->studentEntry->getFirstname();
-      lastname = it->current()->studentEntry->getLastname();
-      numofcourses = it->current()->studentEntry->getNumofcourses();
+  while(it->hasNext()){
+    studentEntry = it->next();
+    if(studentEntry->getPostCode() == postcode && studentEntry->getDeprt() == deprt){
+      firstname = studentEntry->getFirstname();
+      lastname =  studentEntry->getLastname();
+      numofcourses = studentEntry->getNumofcourses();
       cout << firstname << "\t"<< lastname << "\t" << numofcourses << endl;
-    }
-    while(it->hasNext()){
-      it->next();
-      if(it->current()->studentEntry->getPostCode() == postcode && it->current()->studentEntry->getDeprt() == deprt){
-	firstname = it->current()->studentEntry->getFirstname();
-	lastname =  it->current()->studentEntry->getLastname();
-	numofcourses = it->current()->studentEntry->getNumofcourses();
-	cout << firstname << "\t"<< lastname << "\t" << numofcourses << endl;
-      }
     }
   }
 }
@@ -195,16 +177,13 @@ void Stucs :: percentile(int postcode){
   float percent = 0.0;
   int localStudents = 0;
   int allStudents = 0;
+  StudentEntry *studentEntry;
   StuIterator *it = hashTable->getIter(postcode);
-  if(it != NULL){
-    if(it->current()->studentEntry->getPostCode() == postcode)
+  while(it->hasNext()){
+    studentEntry = it->next();
+    if(studentEntry->getPostCode() == postcode)
       localStudents++;
-    while(it->hasNext()){
-      it->next();
-      if(it->current()->studentEntry->getPostCode() == postcode)
-	localStudents++;
-    } 
-  }
+  } 
   allStudents = skipList->getSize();
   percent = (float)localStudents/(float)allStudents;
   cout << "percentile : " << endl;

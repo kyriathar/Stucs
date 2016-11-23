@@ -99,21 +99,13 @@ void StudentEntryList :: print(){
 
 StuIterator* StudentEntryList :: iterator(){
   StuIterator *it = new StuIterator(*this);
-  if(it->isValid())
-    return it;
-  else
-    return NULL;
+  return it;
 }
 
 StuIterator :: StuIterator(StudentEntryList& studentEntryList){
-  currNode = studentEntryList.getFirst();
-}
-
-bool StuIterator :: isValid(){
-  if(currNode != NULL)
-    return true;
-  else
-    return false;
+  currNode = new StudentEntryNode;
+  currNode->studentEntry = NULL;
+  currNode->next = studentEntryList.getFirst();
 }
 
 bool StuIterator :: hasNext(){
@@ -123,11 +115,7 @@ bool StuIterator :: hasNext(){
     return false;
 }
 
-StudentEntryNode* StuIterator :: current(){
-  return currNode;
-}
-
-StudentEntryNode* StuIterator :: next(){
+StudentEntry* StuIterator :: next(){
   currNode = currNode->next;
-  return currNode;
+  return currNode->studentEntry;
 }
