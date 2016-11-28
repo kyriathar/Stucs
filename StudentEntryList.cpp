@@ -9,7 +9,15 @@ StudentEntryList :: StudentEntryList(){
 }
 
 StudentEntryList :: ~StudentEntryList(){
-  cout << "Destroying a StudentEntryList" << endl;
+  StudentEntryNode *currNode = first;
+  StudentEntryNode *delNode = NULL;
+  while(currNode != NULL){
+    delNode = currNode;
+    currNode = currNode->next;
+    delete delNode->studentEntry;
+    delete delNode;
+  }
+  cout << "Destroyed a StudentEntryList" << endl;
 }
 
 int StudentEntryList :: getSize(){
@@ -106,6 +114,11 @@ StuIterator :: StuIterator(StudentEntryList& studentEntryList){
   currNode = new StudentEntryNode;
   currNode->studentEntry = NULL;
   currNode->next = studentEntryList.getFirst();
+  firstNode = currNode;
+}
+
+StuIterator :: ~StuIterator(){
+  delete firstNode;
 }
 
 bool StuIterator :: hasNext(){

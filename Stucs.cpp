@@ -8,6 +8,13 @@ Stucs :: Stucs(int maxLevel, int maxValue , int size){
   hashTable = new HashTable(size);
 }
 
+Stucs :: ~Stucs(){
+  delete skipList;
+  skipList = NULL;
+  delete hashTable;
+  hashTable = NULL;
+}
+
 void Stucs :: insert(int studid, string lastname, string firstname,
 		     float gpa, int numofcourses, string deprt,
 		     int postcode){
@@ -69,6 +76,7 @@ void Stucs :: raverage(int studida, int studidb){
       gpaAverage += studentEntry->getGpa();
       i++;
     }
+    delete it;
     gpaAverage = gpaAverage/(double)i;
   }
   cout << "raverage : " << endl;
@@ -93,6 +101,7 @@ void Stucs :: average(int postcode){
       cout << firstname << "\t"<< lastname << "\t" << gpa << endl;
     }
   }
+  delete it;
 }
 
 void Stucs :: taverage(int k, int postcode){
@@ -100,13 +109,14 @@ void Stucs :: taverage(int k, int postcode){
   StuIterator *it = hashTable->getIter(postcode);
   DoubleLinkedList l;
   while(it->hasNext()){
-      studentEntry = it->next();
-      if(studentEntry->getPostCode() == postcode){
-	l.add(studentEntry);
-      }
+    studentEntry = it->next();
+    if(studentEntry->getPostCode() == postcode){
+      l.add(studentEntry);
     }
-    l.bubbleSort();
-    l.print(k);
+  }
+  delete it;
+  l.bubbleSort();
+  l.print(k);
 }
 
 void Stucs :: bottom(int k){
@@ -117,6 +127,7 @@ void Stucs :: bottom(int k){
     studentEntry = it->next();
     l.add(studentEntry);
   }
+  delete it;
   l.bubbleSort();
   l.printReverse(k);
 }
@@ -140,6 +151,7 @@ void Stucs :: coursesToTake(int postcode, string deprt){
       cout << firstname << "\t"<< lastname << "\t" << numofcourses << endl;
     }
   }
+  delete it;
 }
 
 void Stucs :: find(float thresholdGpa){
@@ -161,6 +173,7 @@ void Stucs :: find(float thresholdGpa){
       cout << firstname << "\t"<< lastname << "\t" << gpa << endl;
     }
   }
+  delete it;
 }
 
 void Stucs :: percentile(int postcode){
@@ -173,11 +186,27 @@ void Stucs :: percentile(int postcode){
     studentEntry = it->next();
     if(studentEntry->getPostCode() == postcode)
       localStudents++;
-  } 
+  }
+  delete it;
   allStudents = skipList->getSize();
   percent = (float)localStudents/(float)allStudents;
   cout << "percentile : " << endl;
   cout << "percent of students living in postocode " << postcode <<" : " << percent*100 << " %" << endl;
+}
+
+void Stucs :: percentiles(){
+  int postcode;
+  PostCodeIterator *it = hashTable->getPostIter();
+  cout << "percentiles : " << endl;
+  while(it->hasNext()){
+    postcode = it->next();
+    percentile(postcode);
+  }
+  delete it;
+}
+
+void Stucs :: exit(){
+  
 }
 
 void Stucs :: print(){

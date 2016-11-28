@@ -32,9 +32,11 @@ class StudentEntryList{
 class StuIterator{
  private:
   StudentEntryNode *currNode;
+  StudentEntryNode *firstNode;
 
  public:
   StuIterator(StudentEntryList& studentEntryList);
+  ~StuIterator();
   bool hasNext();
   StudentEntry* next();  
 };

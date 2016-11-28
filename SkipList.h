@@ -28,7 +28,7 @@ class SkipList{
   
  public:
   SkipList(int maxLevel, int maxValue);
-  //~SkipList();
+  ~SkipList();
   int insert(StudentEntry *studentEntry);
   void remove(int studid);
   StudentEntry* search(int studid);
@@ -44,10 +44,12 @@ class SkipList{
 class SkipIterator{
  private:
   SkipNode *skipNode;
+  SkipNode *firstNode;
 
  public:
   SkipIterator(SkipList& s, int studida);
   SkipIterator(SkipList& s);
+  ~SkipIterator();
   bool hasNext(int studidb);
   bool hasNext();
   StudentEntry* next();

@@ -18,14 +18,14 @@ int main(){
 	   15342 );
 
   s.insert(2, "Gianoukakis", "Thanos", 5.0, 5, "Kapodistrian",
-	   15342 );
+	   15343 );
 
-  s.insert(3, "Gianakopoulos", "Panagiwtis", 2.5, 52, "Kapodistrian",
-	   15342 );
+  s.insert(3, "Gianakopoulos", "Panagiwtis", 7.5, 52, "Kapodistrian",
+	   15344 );
 
   s.insert(4, "Euaggeliou", "Dimitris", 8.9, 7, "Kapodistrian",
 	   15342 );
 
-  s.find(3);
+  s.percentiles();
   return 0;
 }

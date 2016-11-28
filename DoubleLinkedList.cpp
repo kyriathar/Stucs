@@ -11,11 +11,11 @@ DoubleLinkedList :: DoubleLinkedList(){
 
 DoubleLinkedList :: ~DoubleLinkedList(){
   Node *currNode = first;
-  Node *previous = NULL;
+  Node *delNode = NULL;
   while(currNode != NULL){
-    previous = currNode;
+    delNode = currNode;
     currNode = currNode->next;
-    delete currNode;
+    delete delNode;
   }
 }
 

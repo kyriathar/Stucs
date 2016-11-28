@@ -12,7 +12,7 @@ class Stucs{
 
  public:
   Stucs(int maxLevel, int maxValue , int size);
-  //~Stucs();
+  ~Stucs();
   void insert(int studid, string lastname, string firstname,
 	      float gpa, int numofcourses, string deprt,
 	      int postcode);
@@ -26,6 +26,8 @@ class Stucs{
   void coursesToTake(int postcode, string deprt);
   void find(float thresholdGpa);
   void percentile(int postcode);
+  void percentiles();
+  void exit();
   void print();
 };
 

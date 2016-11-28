@@ -25,6 +25,18 @@ SkipList :: SkipList(int maxLevel, int maxValue){
   this->size = size;
 }
 
+SkipList :: ~SkipList(){
+  SkipNode *currNode = header;
+  SkipNode *delNode = NULL;
+  while(currNode != NULL){
+    delNode = currNode;
+    currNode = currNode->forward[0];
+    delete[] delNode->forward;
+    delete delNode;
+  }
+  cout << "Deleted a SkipList" << endl;
+}
+
 int SkipList :: randomLevel(){
   return rand() % (this->maxLevel);
 }
@@ -194,6 +206,11 @@ SkipIterator :: SkipIterator(SkipList& s){
   skipNode->studentEntry = NULL;
   skipNode->forward = new SkipNode*[1];
   skipNode->forward[0] = s.getFirst();
+  firstNode = skipNode;
+}
+
+SkipIterator :: ~SkipIterator(){
+  delete firstNode;
 }
 
 bool SkipIterator :: hasNext(int studidb){
