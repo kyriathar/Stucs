@@ -33,33 +33,38 @@ void Stucs :: insert(int studid, string lastname, string firstname,
 
 void Stucs :: query(int studid){
   StudentEntry *studentEntry = skipList->search(studid);
+  cout << "query :: " << endl;
   if(studentEntry != NULL)
     studentEntry->toString();
   else
-    cout << "query :: No Student found !" << endl;
+    cout << "No Student found !" << endl;
 }
 
 void Stucs :: modify(int studid, float gpa, int numcourses){
   StudentEntry *studentEntry = skipList->search(studid);
+  cout << "modify :: ";
   if(studentEntry != NULL){
     studentEntry->setGpa(gpa);
     studentEntry->setNumofcourses(numcourses);
+    cout << "Student modified !" << endl;
   }
   else
-    cout << "modify :: No Student found !" << endl;
+    cout << "No Student found !" << endl;
 }
 
 void Stucs :: del(int studid){
   StudentEntry *studentEntry = NULL;
   studentEntry = skipList->search(studid);
+  cout << "delete :: ";
   if(studentEntry != NULL){
     skipList->remove(studid);
     int postcode = studentEntry->getPostCode();
     hashTable->remove(postcode, studid);
     delete studentEntry;
     studentEntry = NULL;
+    cout << "Student deleted !" << endl;
   }else
-    cout << "delete :: No Student found !" << endl;
+    cout << "No Student found !" << endl;
 }
 
 void Stucs :: raverage(int studida, int studidb){
@@ -161,7 +166,7 @@ void Stucs :: find(float thresholdGpa){
   StudentEntry *studentEntry;
   SkipIterator *it = skipList->iterator();
   cout << "find :" << endl;
-  cout << "they owe MAXNUM of courses : " << endl;
+  cout << "they owe 52 courses : " << endl;
   cout << "and have gpa more than " << thresholdGpa << " : "  << endl;
   cout << "firstname\t" << "lastname\t" << "gpa" << endl;
   while(it->hasNext()){
@@ -206,14 +211,21 @@ void Stucs :: percentiles(){
 }
 
 void Stucs :: exit(){
-  
+  delete skipList;
+  skipList = NULL;
+  delete hashTable;
+  hashTable = NULL;
 }
 
 void Stucs :: print(){
-  cout << endl;
-  cout << "HashTable : " << endl;
-  hashTable->print();
-  cout << endl;
-  cout << "SkipList : " << endl;
-  skipList->print();
+  if(skipList == NULL && hashTable == NULL)
+    cout << "Stucs is empty !" << endl;
+  else{
+    cout << endl;
+    cout << "HashTable : " << endl;
+    hashTable->print();
+    cout << endl;
+    cout << "SkipList : " << endl;
+    skipList->print();
+  }
 }

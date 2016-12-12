@@ -1,7 +1,7 @@
-OBJ_FILES = main.o StudentEntry.o StudentEntryList.o HashTable.o SkipList.o Stucs.o DoubleLinkedList.o PostCodeList.o
+OBJ_FILES = main.o StudentEntry.o StudentEntryList.o HashTable.o SkipList.o Stucs.o DoubleLinkedList.o PostCodeList.o my_getopt.o process.o
 CC = g++
 FLAGS = -c -g
-OUT = exe
+OUT = stucs
 
 all : $(OBJ_FILES)
 	$(CC) $(OBJ_FILES) -o $(OUT)
@@ -29,6 +29,12 @@ DoubleLinkedList.o : DoubleLinkedList.cpp
 
 PostCodeList.o : PostCodeList.cpp
 	$(CC) $(FLAGS) PostCodeList.cpp
+
+my_getopt.o : my_getopt.cpp
+	$(CC) $(FLAGS) my_getopt.cpp
+
+process.o : process.cpp
+	$(CC) $(FLAGS) process.cpp
 
 clean :
 	rm -rf $(OBJ_FILES) $(OUT)

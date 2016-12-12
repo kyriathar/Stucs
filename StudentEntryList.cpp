@@ -17,7 +17,7 @@ StudentEntryList :: ~StudentEntryList(){
     delete delNode->studentEntry;
     delete delNode;
   }
-  cout << "Destroyed a StudentEntryList" << endl;
+  cout << "Deleted a StudentEntryList" << endl;
 }
 
 int StudentEntryList :: getSize(){
